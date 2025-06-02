@@ -198,7 +198,7 @@ def main ():
                     f1m[i] = 0
 
             else:
-                if(f1[i] == 0 and i == 0):
+                if(f1[i] == 0 and (i == 1 or i == 2)):
                     suma = f1[i-1] + f1[i+1] + f2[i-1] + f2[i] + f2[i+1]
                     if (suma == 2 or suma == 3):
                         f1m[i] = 1
