@@ -344,16 +344,41 @@ def main ():
     imprimir_arreglos(f2m)
     imprimir_arreglos(f3m)
     # Se agrego la cadena c1 para el avance 2 y esta guarda el nombre del arreglo y los valores del mismo
+
     c1 = ""
     c1 += "f1m "
-    for i in range(0, len(f1m), 1):
+    for i in range (0, len(f1m), 1):
+        c1 += "(0,"
+        c1 += str((i))
+        c1 += ") "
+        c1 += "["
         c1 += str(f1m[i])
+        c1 += "] "
     c1 += ", f2m "
-    for i in range(0, len(f2m), 1):
+    for i in range (0, len(f2m), 1):
+        c1 += "(1,"
+        c1 += str((i))
+        c1 += ") "
+        c1 += "["
         c1 += str(f2m[i])
+        c1 += "] "
     c1 += ", f3m "
-    for i in range(0, len(f3m), 1):
-        c1 += str(f3m[i])
+    for i in range (0, len(f3m), 1):
+        if (i <= 2):
+            c1 += "(2,"
+            c1 += str((i))
+            c1 += ") "
+            c1 += "["
+            c1 += str(f3m[i])
+            c1 += "] "
+        else:
+            c1 += "(2,"
+            c1 += str((i))
+            c1 += ") "
+            c1 += "["
+            c1 += str(f3m[i])
+            c1 += "]"
     c1 += "."
     print(Fore.MAGENTA + "Cadena C1: " + c1 + Fore.RESET)
+
 main()
