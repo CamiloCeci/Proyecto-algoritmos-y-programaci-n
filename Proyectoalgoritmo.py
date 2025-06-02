@@ -37,13 +37,20 @@ def main ():
     def regla1(f1, f2, f3): #soledad (si una celda esta ocupada por una celula y tiene una sola o ninguna celula vecina muere)
         # Se aplica la regla a f1
         for i in range (0, len(f1), 1):
-            if (f1[3]== 1):
-                suma = f1[i-1] + f2[i-1] + f2[i]
+            if (f1[0]== 1 and i == 0):
+                suma = f1[i+1] + f2[i] + f2[i+1]
                 if (suma > 1):
                     f1m[i] = 1
                 else:
                     f1m[i] = 0
 
+            if (f1[3]== 1 and i == 3):
+                suma = f1[i-1] + f2[i-1] + f2[i]
+                if (suma > 1):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+            
             else:
                 if(f1[i] == 1):
                     suma = f1[i-1] + f1[i+1] + f2[i-1] + f2[i] + f2[i+1]
@@ -54,7 +61,14 @@ def main ():
 
         # Se aplica la regla a f2
         for i in range (0, len(f2), 1):
-            if (f2[3]== 1):
+            if (f2[0]== 1 and i == 0):
+                suma = f1[i] + f1[i+1] + f2[i+1] + f3[i] + f3[i+1]
+                if (suma > 1):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+
+            if (f2[3]== 1 and i == 3):
                 suma = f1[i-1] + f1[i] + f2[i-1] + f3[i-1] + f3[i]
                 if (suma > 1):
                     f2m[i] = 1
@@ -71,7 +85,14 @@ def main ():
             
         # Se aplica la regla a f3
         for i in range (0, len(f3), 1):
-            if (f3[3]== 1):
+            if (f3[0]== 1 and i == 0):
+                suma = f3[i+1] + f2[i] + f2[i+1]
+                if (suma > 1):
+                    f3m[i] = 1
+                else:
+                    f3m[i] = 0
+
+            if (f3[3]== 1 and i == 3):
                 suma = f3[i-1] + f2[i-1] + f2[i]
                 if (suma > 1):
                     f3m[i] = 1
@@ -89,7 +110,14 @@ def main ():
     def regla2(f1, f2, f3): #superpoblacion (si la celda esta ocupada por una celula y tiene 4 o mas celulas vecinas muere)
         # Se aplica la regla a f1
         for i in range (0, len(f1), 1):
-            if (f1[3]== 1):
+            if (f1[0]== 1 and i == 0):
+                suma = f1[i+1] + f2[i] + f2[i+1]
+                if (suma >= 4):
+                    f1m[i] = 0
+                else:
+                    f1m[i] = 1
+
+            if (f1[3]== 1 and i == 3):
                 suma = f1[i-1] + f2[i-1] + f2[i]
                 if (suma >= 4):
                     f1m[i] = 0
@@ -106,7 +134,14 @@ def main ():
 
         # Se aplica la regla a f2
         for i in range (0, len(f2), 1):
-            if (f2[3]== 1):
+            if (f2[0]== 1 and i == 0):
+                suma = f1[i] + f1[i+1] + f2[i+1] + f3[i] + f3[i+1]
+                if (suma >= 4):
+                    f1m[i] = 0
+                else:
+                    f1m[i] = 1
+
+            if (f2[3]== 1 and i == 3):
                 suma = f1[i-1] + f1[i] + f2[i-1] + f3[i-1] + f3[i]
                 if (suma >= 4):
                     f2m[i] = 0
@@ -123,7 +158,14 @@ def main ():
             
         #Se aplica la regla a f3
         for i in range (0, len(f3), 1):
-            if (f3[3]== 1):
+            if (f3[0]== 1 and i == 0):
+                suma = f3[i+1] + f2[i] + f2[i+1]
+                if (suma >= 4):
+                    f3m[i] = 0
+                else:
+                    f3m[i] = 1
+
+            if (f3[3]== 1 and i == 3):
                 suma = f3[i-1] + f2[i-1] + f2[i]
                 if (suma >= 4):
                     f3m[i] = 0
@@ -141,7 +183,14 @@ def main ():
     def regla3(f1, f2, f3): #vecinos (si la celda esta ocupada por una celula y tiene 2 o 3 celulas vecinas sobrevive)
         # Se aplica la regla a f1
         for i in range (0, len(f1), 1):
-            if (f1[3]== 1):
+            if (f1[0]== 0 and i == 0):
+                suma = f1[i+1] + f2[i] + f2[i+1]
+                if (suma == 2 or suma == 3):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+
+            if (f1[3]== 1 and i == 3):
                 suma = f1[i-1] + f2[i-1] + f2[i]
                 if (suma == 2 or suma == 3):
                     f1m[i] = 1
@@ -149,7 +198,7 @@ def main ():
                     f1m[i] = 0
 
             else:
-                if(f1[i] == 0):
+                if(f1[i] == 0 and i == 0):
                     suma = f1[i-1] + f1[i+1] + f2[i-1] + f2[i] + f2[i+1]
                     if (suma == 2 or suma == 3):
                         f1m[i] = 1
@@ -158,13 +207,20 @@ def main ():
 
         # Se aplica la regla a f2
         for i in range (0, len(f2), 1):
-            if (f2[3]== 0):
+            if (f2[0]== 0 and i == 0):
+                suma = f1[i] + f1[i+1] + f2[i+1] + f3[i] + f3[i+1]
+                if (suma == 2 or suma == 3):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+
+            if (f2[3]== 0 and i == 3):
                 suma = f1[i-1] + f1[i] + f2[i-1] + f3[i-1] + f3[i]
                 if (suma == 2 or suma == 3):
                     f2m[i] = 1
                 else:
                     f2m[i] = 0
-
+            
             else:
                 if(f2[i] == 0):
                     suma = f1[i-1] + f1[i] + f1[i+1] + f2[i-1] + f2[i+1] + f3[i-1] + f3[i] + f3[i+1]
@@ -175,7 +231,14 @@ def main ():
         
         # Se aplica la regla a f3
         for i in range (0, len(f3), 1):
-            if (f3[3]== 0):
+            if (f3[0]== 0 and i == 0):
+                suma = f3[i+1] + f2[i] + f2[i+1]
+                if (suma == 2 or suma == 3):
+                    f3m[i] = 1
+                else:
+                    f3m[i] = 0
+
+            if (f3[3]== 0 and i == 3):
                 suma = f3[i-1] + f2[i-1] + f2[i]
                 if (suma == 2 or suma == 3):
                     f3m[i] = 1
@@ -193,13 +256,20 @@ def main ():
     def regla4(f1, f2, f3): #reproduccion (si la celda no esta ocupada por una celula y tiene 3 celulas vecinas, nace una nueva celula)
         # Se aplica la regla a f1
         for i in range (0, len(f1), 1):
-            if (f1[3]== 0):
-                suma = f1[i-1] + f2[i-1] + f2[i]
+            if (f1[0]== 0 and i == 0):
+                suma = f1[i+1] + f2[i] + f2[i+1]
                 if (suma == 3):
                     f1m[i] = 1
                 else:
                     f1m[i] = 0
 
+            if (f1[3]== 0 and i == 3):
+                suma = f1[i-1] + f2[i-1] + f2[i]
+                if (suma == 3):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+        
             else:
                 if(f1[i] == 0):
                     suma = f1[i-1] + f1[i+1] + f2[i-1] + f2[i] + f2[i+1]
@@ -210,12 +280,20 @@ def main ():
 
         # Se aplica la regla a f2
         for i in range (0, len(f2), 1):
-            if (f2[3]== 0):
+            if (f2[0]== 0 and i == 0):
+                suma = f1[i] + f1[i+1] + f2[i+1] + f3[i] + f3[i+1]
+                if (suma == 3):
+                    f1m[i] = 1
+                else:
+                    f1m[i] = 0
+
+            if (f2[3]== 0 and i == 3):
                 suma = f1[i-1] + f1[i] + f2[i-1] + f3[i-1] + f3[i]
                 if (suma == 3):
                     f2m[i] = 1
                 else:
                     f2m[i] = 0
+
 
             else:
                 if(f2[i] == 0):
@@ -227,7 +305,14 @@ def main ():
 
         # Se aplica la regla a f3
         for i in range (0, len(f3), 1):
-            if (f3[3]== 0):
+            if (f3[0]== 0 and i == 0):
+                suma = f3[i+1] + f2[i] + f2[i+1]
+                if (suma == 3):
+                    f3m[i] = 1
+                else:
+                    f3m[i] = 0
+
+            if (f3[3]== 0 and i == 3):
                 suma = f3[i-1] + f2[i-1] + f2[i]
                 if (suma == 3):
                     f3m[i] = 1
@@ -258,4 +343,17 @@ def main ():
     imprimir_arreglos(f1m)
     imprimir_arreglos(f2m)
     imprimir_arreglos(f3m)
+    # Se agrego la cadena c1 para el avance 2 y esta guarda el nombre del arreglo y los valores del mismo
+    c1 = ""
+    c1 += "f1m "
+    for i in range(0, len(f1m), 1):
+        c1 += str(f1m[i])
+    c1 += ", f2m "
+    for i in range(0, len(f2m), 1):
+        c1 += str(f2m[i])
+    c1 += ", f3m "
+    for i in range(0, len(f3m), 1):
+        c1 += str(f3m[i])
+    c1 += "."
+    print(Fore.MAGENTA + "Cadena C1: " + c1 + Fore.RESET)
 main()
