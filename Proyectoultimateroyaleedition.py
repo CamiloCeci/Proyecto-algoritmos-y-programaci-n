@@ -10,13 +10,31 @@ def main ():
     caldo_2 = np.full((20,20),0)
     caldo_clon = np.full((20,20)," ")
 
+    def cadena_car(caldo): # (ERROR. En la posicion final tiene que tener un punto, pero sale despegado y con una coma)
+        c1 = ""
+        for i in range (0, len(caldo), 1):
+            for j in range(0, len(caldo), 1):
+                if (caldo[i,j] == 1):
+                    c1 += Fore.MAGENTA+"("
+                    c1 += Fore.GREEN+str((i))
+                    c1 += Fore.MAGENTA+","
+                    c1 += Fore.GREEN+str((j))
+                    c1 += Fore.MAGENTA+"), "
+        c1 += Fore.MAGENTA+"."
+
+        print()
+        print(Fore.CYAN+"----- Posiciones de las células -----"+Fore.RESET)    
+        print()        
+        print(c1 + Fore.RESET)
+        print()
+
     def llenar_matriz(caldo_og):
         for i in range(0,len(caldo_og),1):
             for j in range(0,len(caldo_og),1):
                 caldo_og[i,j] = random.randint(0,1)
 
     def mostrar_matriz(caldo):
-        print("Los elementos de la Matriz son:")
+        print(Fore.GREEN+"Los elementos de la Matriz son:"+Fore.RESET)
         for i in range(0,len(caldo),1):
             for j in range(0,len(caldo),1):
                 print(caldo[i,j],end=" ")
@@ -270,7 +288,8 @@ def main ():
             print(Fore.MAGENTA + "=====================================" + Fore.RESET)
 
             while (verdad ==  False):
-                    opcion = int(input("Seleccione una opción: "))
+                    opcion = int(input(Fore.YELLOW+"Seleccione una opción: "+Fore.RESET))
+                    print()
                     if (opcion > 0 or opcion > 4):
                         verdad = True
                     else:
@@ -356,25 +375,28 @@ def main ():
         for i in range(0,len(caldo_og),1):
             for j in range(0,len(caldo_og),1):
                 caldo_destino[i,j] = caldo_origen[i,j]
-                
-
 
     def aplicar_generaciones(caldo_og , caldo_clon, caldo_2):
         caldillo = np.full((20,20),0)
         generacion = 0
-        print(Fore.YELLOW+"Cuantas generaciones quieres que se reproduzcan: "+Fore.RESET)
-
-        repeticiones = int(input())
+        repeticiones = int(input(Fore.YELLOW+"¿Cuántas generaciones quieres que se reproduzcan?: "+Fore.RESET))
+        print()
         while(repeticiones > 0):
             repeticiones -= 1
             generacion += 1
             if(generacion%2 == 1):
                 mutacion(caldo_og, caldo_2)
                 cambio(caldo_2, caldo_clon)
+                print(Fore.BLUE+f'------ Generación ',generacion,'------'+Fore.RESET)
+                print()
+                mostrar_matriz(caldo_2)
+                print()
                 mostrar_matriz(caldo_clon)
+                cadena_car(caldo_2)
+                pausa = input(Fore.YELLOW+"Pulse cualquier tecla para continuar: "+Fore.RESET)
                 print()
                 if (alguna_viva(caldo_2) == False):
-                    print("Todas las celulas murieron en la generacion: " , generacion)
+                    print(Fore.BLUE+f'Todas las celulas murieron en la generacion: ', generacion,''+Fore.RESET)
                     print()
                     mostrar_matriz(caldo_2)
                     # Las celulas murieron, la esperanza se ha ido, la civilizacion se queda a las puestas de su era dorada, es todo tu culpa, eres un dios engreido, reevalua tus decisiones, se mejor
@@ -383,26 +405,26 @@ def main ():
             else:
                 mutacion(caldo_2, caldo_og)
                 cambio(caldo_og, caldo_clon)
+                print(Fore.BLUE+f'------ Generación ',generacion,'------'+Fore.RESET)
+                print()
+                mostrar_matriz(caldo_og)
+                print()
                 mostrar_matriz(caldo_clon)
+                cadena_car(caldo_og)
+                pausa = input(Fore.YELLOW+"Pulse cualquier tecla para continuar: "+Fore.RESET)
                 if (alguna_viva(caldo_og) == False):
-                    print("Todas las celulas murieron en la generacion: " , generacion)
+                    print("Todas las celulas murieron en la generacion: " , generacion) # Posible agregar pausa (revisar)
                     print()
                     mostrar_matriz(caldo_og)
                 copiar_matriz_origendestino(caldo_og, caldillo) 
 
-        print("¿Quieres implemenetar algun milagro? (si/no)")
-        validador = input()
+        #print("¿Quieres implementar algun milagro? (si/no)")
+        validador = input(Fore.YELLOW+"¿Quieres implementar algun milagro? (si/no): "+Fore.RESET)
+        print()
         if (validador == "si" or validador == "SI" or validador == "Si"): # Arreglen esta verga
             menu_milagros(caldillo)
         elif (validador == "no" or validador == "NO" or validador == "No"):
             print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
-
-        
-                
-            
-        
-
-                    
 
     def menu_principal():
         opcion = 0
@@ -419,7 +441,8 @@ def main ():
             print(Fore.MAGENTA+"======================================"+Fore.RESET)
              #verificacion numero valido
             while (verdad ==  False):
-                opcion = int(input("Seleccione una opción: "))
+                opcion = int(input(Fore.YELLOW+"Seleccione una opción: "+Fore.RESET))
+                print()
                 if (opcion > 0 or opcion > 4):
                     verdad = True
                 else:
@@ -428,52 +451,55 @@ def main ():
 
             match opcion:
                 case 1:
-                    print("Opción 1: Generar matriz aleatoriamente")
-                    print(Fore.YELLOW+"Pulse cualquier tecla para continuar: "+Fore.RESET)
-                    x = input()
+                    print(Fore.LIGHTRED_EX+"Opción 1: Generar matriz aleatoriamente"+Fore.RESET)
+                    print()
                     llenar_matriz(caldo_og)
-                    print(Fore.CYAN+"Caldo de cultivo inicial: "+Fore.RESET)
+                    print(Fore.BLUE+"---Caldo de cultivo inicial---"+Fore.RESET)
+                    print()
                     cambio(caldo_og, caldo_clon)
+                    mostrar_matriz(caldo_og)
+                    print()
                     mostrar_matriz(caldo_clon)
+                    cadena_car(caldo_og)
                     aplicar_generaciones(caldo_og , caldo_clon, caldo_2)
                     break
                     
-                        
-
-
                 case 2:
-                    print("Opción 2: Matriz personalizada")
-                    # cuantas vivas quieres bro
-                    print(Fore.YELLOW+"Pulse cualquier tecla para continuar: "+Fore.RESET)
-                    x = input()
-                    print(Fore.YELLOW+"¿Cuántas células quieres que haya en el caldo de cultivo?: "+Fore.RESET)
-                    celulas = int(input())
-                    while (celulas > (len(caldo_og)*len(caldo_og))):
-                            print(Fore.RED+"ERROR. La cantidad de células a asignar en la matriz no puede ser mayor a la cantidad de celdas."+Fore.RESET)
-                            print(Fore.YELLOW+"Introduzca nuevamente la cantidad de células que quiere en la matriz:"+Fore.RESET)
-                            celulas = int(input())
+                    print(Fore.LIGHTRED_EX+"Opción 2: Matriz personalizada"+Fore.RESET)
+                    print()
+                    print(Fore.YELLOW+f'La cantidad de células que debe tener la matriz tiene que estar comprendida entre', len(caldo_og),'y', (len(caldo_og)*len(caldo_og)),''+Fore.RESET)
+                    celulas = int(input(Fore.YELLOW+"¿Cuántas células quieres que haya en el caldo de cultivo?: "+Fore.RESET))
+                    print()
+                    while (celulas < len(caldo_og) or celulas > (len(caldo_og)*len(caldo_og))):
+                            print(Fore.RED+f'ERROR. La cantidad de células que debe tener la matriz tiene que estar comprendida entre', len(caldo_og),'y', (len(caldo_og)*len(caldo_og)),''+Fore.RESET)
+                            celulas = int(input(Fore.YELLOW+"Introduzca nuevamente la cantidad de células que quiere en la matriz:"+Fore.RESET))
+                            print()
                     while (celulas > 0):
                         valori = random.randint(0, len(caldo_og)-1)
                         valorj = random.randint(0, len(caldo_og)-1)
-                        caldo_og[valori, valorj] = 1
-                        celulas -= 1
-                    mostrar_matriz(caldo_og)
+                        if(caldo_og[valori, valorj] != 1):
+                            caldo_og[valori, valorj] = 1
+                            celulas -= 1
+                    cambio(caldo_og, caldo_clon)
+                    print(Fore.BLUE+"---Caldo de cultivo inicial---"+Fore.RESET)
                     print()
+                    mostrar_matriz(caldo_clon)
+                    cadena_car(caldo_og)
                     aplicar_generaciones(caldo_og , caldo_clon, caldo_2)
                     break
-                    
-
-                    
+                        
                 case 3:
-                    print("Opción 3: Matriz cargada de archivos")
+                    print(Fore.LIGHTRED_EX+"Opción 3: Matriz cargada de archivos"+Fore.RESET)
+                    print()
                     leer_archivos()
-                    print(Fore.CYAN+"Caldo de cultivo inicial: "+Fore.RESET)
+                    print(Fore.BLUE+"---Caldo de cultivo inicial--- "+Fore.RESET)
+                    print()
                     cambio(caldo_og, caldo_clon)
                     mostrar_matriz(caldo_clon)
                     aplicar_generaciones(caldo_og , caldo_clon, caldo_2)
                     break
                 case 4:
-                    print("Opción 4: Guardar y Salir")
+                    print(Fore.LIGHTRED_EX+"Opción 4: Guardar y Salir"+Fore.RESET)
                     print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
                     exit()
                 case _:
@@ -481,25 +507,23 @@ def main ():
 
         
     #Programa principal
-    print(Fore.YELLOW +"UCAB, Realizado por: Camilo Ceci C.I. 31.707.565 , Santhiago Singer C.I. , Henrique Hopkins C.I. , Diego González C.I. 31.873.850" +Fore.RESET)
+    print(Fore.YELLOW +"UCAB, Realizado por: Camilo Ceci C.I. 31.707.565 , Santhiago Singer C.I. 31.160.338 , Henrique Hopkins C.I. , Diego González C.I. 31.873.850" +Fore.RESET)
     print()
     menu_principal()
-    
-    
-
 
 main()
-
-# Inclusion de gestion de archivos para recibir un archivo y rellenar la matriz en base al archivo
-# Interfaz del menu, en donde se le pida al usuario que es lo que quiere hacer (matriz random, matriz personalizada, matriz archivo)
-# Repetir generaciones hasta n veces que indique el usuario
-# Que el usuario indique la cantidad de celulas vivas que se quieren generar en la matriz
-# Sino hacerlo aleatoriamente
-# Calcular y mostrar en pantalla el resultado de cada generacion 
-# Si entre las generaciones la matriz muere, dejar de ejecutar las generaciones y mostrar la matriz 
-# Mostrar la opcionde si se quiere aplicar un milagro al final de las generaciones 
-# Finalizar la pedida de input del usuario
-                
+               
 # Lista de tareas:
 #
-# Guardar la matriz en un archivo binario
+# 1. Que la cadena de caracteres (cadena_car) de las posiciones de las celulas se 
+#    imprima correctamente (error con el "." final)
+# 2. Que se imprima con colores las matrices de numeros (rojo para 0, azul para 1, amarillo para 2)
+# 3. Mostrar las matrices de numeros al aplicar los milagros
+# 4. Cuando se pregunta la cantidad de generaciones, hay que colocar una condicion 
+#    para que sea mayor o igual a 1 sino mandar mensaje de erro y volver a preguntar por la cantidad de generaciones
+# 5. Poner mas bonito visualmente el programa (frontend)
+# 6. Quitar comentarios trol 
+# 7. Agregar comentarios explicativos en el codigo para que sea mas facil a la hora de la defensa para apoyarse
+# 8. Verifiquen cedulas y nombres
+# 9. Trabajen perritas
+
