@@ -381,6 +381,10 @@ def main ():
         generacion = 0
         repeticiones = int(input(Fore.YELLOW+"¿Cuántas generaciones quieres que se reproduzcan?: "+Fore.RESET))
         print()
+        while (repeticiones < 1):
+            print(Fore.RED+"ERROR. La cantidad de generaciones tiene que ser mínimo 1."+Fore.RESET)
+            repeticiones = int(input(Fore.YELLOW+"Introduzca nuevamente la cantidad de generaciones que quiere que se reproduzcan: "+Fore.RESET))
+            print()
         while(repeticiones > 0):
             repeticiones -= 1
             generacion += 1
@@ -417,13 +421,15 @@ def main ():
                     print()
                     mostrar_matriz(caldo_og)
                 copiar_matriz_origendestino(caldo_og, caldillo) 
-
-        #print("¿Quieres implementar algun milagro? (si/no)")
         validador = input(Fore.YELLOW+"¿Quieres implementar algun milagro? (si/no): "+Fore.RESET)
         print()
+        while (validador != "si" and validador != "no" and validador != "SI" and validador != "NO" and validador != "Si" and validador != "No"):
+            print(Fore.RED+"ERROR: Ingrese una opción válida (si/no)."+Fore.RESET)
+            validador = input(Fore.YELLOW+"Responde nuevamente con si o no: "+Fore.RESET)
+            print()
         if (validador == "si" or validador == "SI" or validador == "Si"): # Arreglen esta verga
             menu_milagros(caldillo)
-        elif (validador == "no" or validador == "NO" or validador == "No"):
+        else: 
             print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
 
     def menu_principal():
@@ -439,7 +445,7 @@ def main ():
             print(Fore.MAGENTA+"-------------------------------------")
             print(Fore.CYAN+" 4. Guardar y Salir                  ")
             print(Fore.MAGENTA+"======================================"+Fore.RESET)
-             #verificacion numero valido
+            # verificacion numero valido
             while (verdad ==  False):
                 opcion = int(input(Fore.YELLOW+"Seleccione una opción: "+Fore.RESET))
                 print()
@@ -518,12 +524,13 @@ main()
 # 1. Que la cadena de caracteres (cadena_car) de las posiciones de las celulas se 
 #    imprima correctamente (error con el "." final)
 # 2. Que se imprima con colores las matrices de numeros (rojo para 0, azul para 1, amarillo para 2)
-# 3. Mostrar las matrices de numeros al aplicar los milagros
-# 4. Cuando se pregunta la cantidad de generaciones, hay que colocar una condicion 
-#    para que sea mayor o igual a 1 sino mandar mensaje de erro y volver a preguntar por la cantidad de generaciones
-# 5. Poner mas bonito visualmente el programa (frontend)
-# 6. Quitar comentarios trol 
-# 7. Agregar comentarios explicativos en el codigo para que sea mas facil a la hora de la defensa para apoyarse
-# 8. Verifiquen cedulas y nombres
+# 3. Mostrar las matrices de numeros al aplicar los milagros y tambien cuando se escoge la opcion de 
+#    matriz personalizada, con el caldo cultivo inicial no se muestra la matriz de numeros
+# 4. Poner mas bonito visualmente el programa (frontend)
+# 5. Quitar comentarios trol 
+# 6. Agregar comentarios explicativos en el codigo para que sea mas facil a la hora de la defensa para apoyarse
+# 7. Verifiquen cedulas y nombres
+# 8. (Agregar robustez) Cuando se pide la cantidad de repeticiones para saber cuantas generaciones se van a producir
+#    Si colocas algo que no sea un numero explota (tal vez una funcion para no tener que repetirlo varias veces en el programa)
 # 9. Trabajen perritas
 
