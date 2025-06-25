@@ -300,6 +300,8 @@ def main ():
                     print("✨ Ejecutando el Primer Milagro...")
                     milagro1(caldo)
                     cambio(caldo, caldo_clon)
+                    mostrar_matriz(caldo)
+                    print()
                     mostrar_matriz(caldo_clon)
                     guardar_archivo(caldo)
                     print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
@@ -308,6 +310,8 @@ def main ():
                     print("✨ Ejecutando el Segundo Milagro...")
                     milagro2(caldo)
                     cambio(caldo, caldo_clon)
+                    mostrar_matriz(caldo)
+                    print()
                     mostrar_matriz(caldo_clon)
                     guardar_archivo(caldo)
                     print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
@@ -316,6 +320,8 @@ def main ():
                     print("✨ Ejecutando el Tercer Milagro...")
                     milagro3(caldo)
                     cambio(caldo, caldo_clon)
+                    mostrar_matriz(caldo)
+                    print()
                     mostrar_matriz(caldo_clon)
                     guardar_archivo(caldo)
                     print(Fore.GREEN+"Thanks for playing *con voz de Luigi*"+Fore.RESET)
@@ -489,6 +495,8 @@ def main ():
                     cambio(caldo_og, caldo_clon)
                     print(Fore.BLUE+"---Caldo de cultivo inicial---"+Fore.RESET)
                     print()
+                    mostrar_matriz(caldo_og)
+                    print()
                     mostrar_matriz(caldo_clon)
                     cadena_car(caldo_og)
                     aplicar_generaciones(caldo_og , caldo_clon, caldo_2)
@@ -524,13 +532,11 @@ main()
 # 1. Que la cadena de caracteres (cadena_car) de las posiciones de las celulas se 
 #    imprima correctamente (error con el "." final)
 # 2. Que se imprima con colores las matrices de numeros (rojo para 0, azul para 1, amarillo para 2)
-# 3. Mostrar las matrices de numeros al aplicar los milagros y tambien cuando se escoge la opcion de 
-#    matriz personalizada, con el caldo cultivo inicial no se muestra la matriz de numeros
-# 4. Poner mas bonito visualmente el programa (frontend)
-# 5. Quitar comentarios trol 
-# 6. Agregar comentarios explicativos en el codigo para que sea mas facil a la hora de la defensa para apoyarse
-# 7. Verifiquen cedulas y nombres
-# 8. (Agregar robustez) Cuando se pide la cantidad de repeticiones para saber cuantas generaciones se van a producir
+# 3. Poner mas bonito visualmente el programa (frontend)
+# 4. Quitar comentarios trol 
+# 5. Agregar comentarios explicativos en el codigo para que sea mas facil a la hora de la defensa para apoyarse
+# 6. Verifiquen cedulas y nombres
+# 7. (Agregar robustez) Cuando se pide la cantidad de repeticiones para saber cuantas generaciones se van a producir
 #    Si colocas algo que no sea un numero explota (tal vez una funcion para no tener que repetirlo varias veces en el programa)
-# 9. Trabajen perritas
+# 8. Trabajen perritas
 
